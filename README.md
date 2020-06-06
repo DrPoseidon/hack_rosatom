@@ -4,3 +4,5 @@
 ![alt text](https://github.com/DrPoseidon/hack_rosatom/blob/master/screens/signup.png)
 # Вид страницы с ошибками
 ![alt text](https://github.com/DrPoseidon/hack_rosatom/blob/master/screens/signup_error.png)
+# Alpha версия личного кабинета
+![alt text](https://github.com/DrPoseidon/hack_rosatom/blob/master/screens/alpha_pa.png)
