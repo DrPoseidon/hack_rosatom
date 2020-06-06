@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('connection.php');
+
 $p_number = $_POST['p-number'];
 $surname = $_POST['surname'];
 $name = $_POST['name'];
@@ -12,7 +13,17 @@ $pass_confirm = $_POST['pass-confirm'];
 $sub = $_POST['subdivision'];
 $pos = $_POST['position'];
 
+$path = find_word('Работа');
+for($i = 0; $i < count($path); $i++){
+    if($i == 0) {
+        $full_path .= $path[$i];
+    }else{
+        $full_path .= '||'.$path[$i];
+    }
+}
+
 $id_info = rand(0,1000000);
+$id_inst = rand(0,1000000);
 $error_fields = [];
 if($p_number === ''){
     $error_fields[] = 'p-number';
@@ -69,13 +80,16 @@ if(!empty($error_fields)){
         $id_sub = $stmt->fetch();
         $id_sub = $id_sub['id_sub'];
 
-        $query = 'INSERT INTO info(surname, name, mid_name, phone, id_info, id_sub,position) VALUES (?,?,?,?,?,?,?)';
+        $query = 'INSERT INTO `instructions`(`id_inst`, `path`) VALUES (?,?)';
         $stmt = $connection->prepare($query);
-        $stmt->execute([$surname,$name,$mid_name,$phone,$id_info,$id_sub,$pos]);
+        $stmt->execute([$id_inst,$full_path]);
 
-        $query = 'update users set id_info = ? where p_number = ?';
+
+        $query = 'INSERT INTO `info`(`surname`, `name`, `mid_name`, `phone`, `id_info`, `id_sub`, `p_number`, `id_inst`, `position`) VALUES (?,?,?,?,?,?,?,?,?)';
         $stmt = $connection->prepare($query);
-        $stmt->execute([$id_info, $p_number]);
+        $stmt->execute([$surname,$name,$mid_name,$phone,$id_info,$id_sub,$p_number,$id_inst,$pos]);
+
+
         $_SESSION['user'] = [
             'email' => $email
         ];
@@ -94,3 +108,23 @@ if(!empty($error_fields)){
         echo json_encode($response);
     }
 
+
+function find_word($value)
+{
+    $dir = '../files/files1';
+    $files1 = scandir($dir);
+    $st_strpos = $value;
+    $k = 0;
+    $arr = array();
+    for ($i = 2; $i < count($files1); $i++) {
+        $st_search = '../files/files1/' . $files1[$i];
+        if (strpos(file_get_contents("$st_search"), "$st_strpos")) {
+            array_push($arr,( '../files/files1/'.$files1[$i]));
+            $k++;
+        }
+    }
+    if ($k == 0) {
+        array_push($arr,('Нет совпадений'));
+    }
+    return $arr;
+}

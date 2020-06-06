@@ -1,10 +1,23 @@
 <?php
-$st_strpos = 'Коммерческий агент';
-$array = [[0] => '001.txt',[1] => '002.txt',[2] => '003.txt'];
-for($i = 0; $i < count($array); $i++){
-$st_search = $array[$i];
-echo "Результат поиска в файле $st_search: <br>";
-if (strpos(file_get_contents("$st_search"), "$st_strpos")) echo "Есть такое слово ".$array[$i]; else echo "Нет такого слова";
-}
+print_r(find_word('База'));
+    function find_word($value)
+    {
+        $dir = '../files/files1';
+        $files1 = scandir($dir);
+        $st_strpos = $value;
+        $k = 0;
+        $arr = array();
+        for ($i = 2; $i < /*count($files1)*/5; $i++) {
+            $st_search = 'files1/' . $files1[$i];
+            if (strpos(file_get_contents("$st_search"), "$st_strpos")) {
+                array_push($arr,('Есть совпадение ' . $files1[$i] . '</br>'));
+                $k++;
+            }
+        }
+        if ($k == 0) {
+            array_push($arr,('Нет совпадений'));
+        }
+        return $arr;
+    }
 ?>
 
