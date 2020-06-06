@@ -28,7 +28,7 @@
     });
 
     $(function(){
-        //2. Получить элемент, к которому необходимо добавить маску
+        //Получить элемент, к которому необходимо добавить маску
         $("#phone").mask("8(999) 999-9999");
     });
 
@@ -49,7 +49,9 @@
             email = $('input[name="email"]').val(),
             pass = $('input[name="pass"]').val(),
             pass_confirm = $('input[name="pass-confirm"]').val(),
+            pos = $('input[name="position"]').val(),
             sub = $('select[name="subdivision"]').val();
+
 
 
         let formData = new FormData();
@@ -61,7 +63,9 @@
         formData.append('email', email);
         formData.append('pass',pass);
         formData.append('pass-confirm',pass_confirm);
+        formData.append('position',pos);
         formData.append('subdivision',sub);
+
 
         $.ajax({
             url: 'back/signup.php',
@@ -73,7 +77,7 @@
             data: formData,
             success (data) {
                 if(data.status){
-                    document.location.href = '/index.php';
+                    document.location.href = '/profile.php';
                 } else {
                     if(data.type === 1){
                         data.fields.forEach(function (field) {
@@ -86,3 +90,42 @@
             }
         });
     });
+    /*
+Авторизация
+*/
+    $('.signin-btn').click(function (e) {
+        e.preventDefault();
+        $(`input`).removeClass('error');
+
+        let email = $('input[name="email"]').val(),
+            pass = $('input[name="pass"]').val();
+
+        let formData = new FormData();
+        formData.append('email', email);
+        formData.append('pass',pass);
+
+
+
+        $.ajax({
+            url: 'back/signin.php',
+            type: 'POST',
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formData,
+            success (data) {
+                if(data.status){
+                    document.location.href = '/profile.php';
+                } else {
+                    if(data.type === 1){
+                        data.fields.forEach(function (field) {
+                            $(`input[name="${field}"]`).addClass('error');
+                        });
+                    }
+                    $('.msg-err').removeClass('none').text(data.message);
+                }
+            }
+        });
+    });
+

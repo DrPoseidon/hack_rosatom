@@ -16,12 +16,12 @@
 <img src="img/rosatom-2.png" class="rosatom-logo">
 <form class="signin-form">
         <h2 style="color: white">Авторизация</h2>
-        <input type="text" name="login" placeholder="Логин" class="form-control index-input">
+        <input type="email" name="email" placeholder="Почта" class="form-control index-input">
     <div class="password">
-        <input type="password" id="password-input"  name="password" placeholder="Пароль" class="form-control index-input">
+        <input type="password" id="password-input"  name="pass" placeholder="Пароль" class="form-control index-input">
         <label style="display: flex;flex-direction: row; align-items: baseline;"><input type="checkbox" class="password-checkbox" > <p style="color: white; margin-left: 10px">Показать пароль</p></label>
     </div>
-    <button type="submit" class="btn btn-primary">Войти</button>
+    <button type="submit" class="btn btn-primary signin-btn">Войти</button>
     <p class="p1" style="color: white; margin-top: 10px">
         У вас нет аккаунта?  <a href="register.php">Зарегистрироваться</a>
     </p>

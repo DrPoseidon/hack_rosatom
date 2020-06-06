@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('connection.php');
 $p_number = $_POST['p-number'];
 $surname = $_POST['surname'];
@@ -9,11 +10,15 @@ $email = $_POST['email'];
 $pass = $_POST['pass'];
 $pass_confirm = $_POST['pass-confirm'];
 $sub = $_POST['subdivision'];
+$pos = $_POST['position'];
 
 $id_info = rand(0,1000000);
 $error_fields = [];
 if($p_number === ''){
     $error_fields[] = 'p-number';
+}
+if($pos === ''){
+    $error_fields[] = 'position';
 }
 if($sub === ''){
     $error_fields[] = 'subdivision';
@@ -64,13 +69,16 @@ if(!empty($error_fields)){
         $id_sub = $stmt->fetch();
         $id_sub = $id_sub['id_sub'];
 
-        $query = 'INSERT INTO info(surname, name, mid_name, phone, id_info, id_sub) VALUES (?,?,?,?,?,?)';
+        $query = 'INSERT INTO info(surname, name, mid_name, phone, id_info, id_sub,position) VALUES (?,?,?,?,?,?,?)';
         $stmt = $connection->prepare($query);
-        $stmt->execute([$surname,$name,$mid_name,$phone,$id_info,$id_sub]);
+        $stmt->execute([$surname,$name,$mid_name,$phone,$id_info,$id_sub,$pos]);
 
         $query = 'update users set id_info = ? where p_number = ?';
         $stmt = $connection->prepare($query);
         $stmt->execute([$id_info, $p_number]);
+        $_SESSION['user'] = [
+            'email' => $email
+        ];
         $response = [
             "status" => true,
             "message" => "Регистрация прошла успешно",

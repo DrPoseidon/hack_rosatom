@@ -40,6 +40,8 @@ for ($i = 0; $i < count($res); $i++) {
     </select>
     <label for="form-control">Табельный номер</label>
     <input type="number" name="p-number" class="form-control" placeholder="12345678">
+    <label for="form-control">Должность</label>
+    <input type="text" name="position" class="form-control" placeholder="Должность">
     <label for="form-control">Фамилия</label>
     <input type="text" name="surname" class="form-control" placeholder="Фамилия">
     <label for="form-control">Имя</label>
