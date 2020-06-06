@@ -37,11 +37,10 @@ $p = explode('||',$full_path);
 <div class="div" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
 <h2 style="color: white">Вы в личном кабинете!</h2>
 <h3 style="color: white"><?=$_SESSION['user']['email']?></h3>
-    <div class="download_div" style="width: 300px; display: flex;flex-wrap: wrap; margin-top: 20px;">
-    <a href="" download="">Скачать</a>
+    <div class="download_div" style="width: 400px; display: flex;flex-wrap: wrap; margin-top: 20px;">
     <?php
     foreach ($p as $pa) {
-        echo '<a href="' .$pa.'" download="" style="margin: 0 20px;">Скачать</a>';
+        echo '<a href="' .$pa.'" download="" style="margin-right: 20px;">Скачать</a>';
     }
     ?>
     </div>

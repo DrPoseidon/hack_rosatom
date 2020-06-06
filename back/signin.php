@@ -41,7 +41,7 @@ if($stmt->rowCount() > 0){
 } else{
     $response = [
         "status" => false,
-        "pass" => $pass
+        "message" => 'Неверный логин или пароль'
     ];
     echo json_encode($response);
 }

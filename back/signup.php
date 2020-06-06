@@ -13,7 +13,7 @@ $pass_confirm = $_POST['pass-confirm'];
 $sub = $_POST['subdivision'];
 $pos = $_POST['position'];
 
-$path = find_word('Работа');
+$path = find_word($pos);
 for($i = 0; $i < count($path); $i++){
     if($i == 0) {
         $full_path .= $path[$i];
