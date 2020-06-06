@@ -30,18 +30,18 @@ $p = explode('||',$full_path);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Росатом Госкорпорация «Росатом» ядерные технологии атомная энергетика АЭС ядерная медицина ядерное машиностроение ядерное топливо атомный ледокол добыча урана ветроэнергетика цифровизация</title>
     <link rel="stylesheet" href="style1.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="shortcut icon" href="/img/rosatom-1.png" type="image/x-icon">
 </head>
 <body>
-<a href="back/logout.php"><button class="btn btn-danger" style="position: absolute;top:20px;left: 20px;">Выход</button></a>
+<a href="back/logout.php"><button class="btnExit" style="position: absolute;top:20px;right: 20px;">Выход</button></a>
+<a href="download.php" style="color: #FFFFFF; background-color: #0000cc; padding: 5px 15px; border: none; text-decoration: none; position: absolute; top: 20px; left: 20px;">Скачать в PDF</a>
 <div class="div" style="position: absolute;left: 50%;transform: translate(-50%,0);">
-<h2 style="color: white;margin-top: 20px;">Вы в личном кабинете!</h2>
-<h3 style="color: white"><?=$_SESSION['user']['email']?></h3>
+<h2 class="youIn">Вы в личном кабинете!</h2>
+<h3 style="color: white; margin-top: 5px;"><?=$_SESSION['user']['email']?></h3
     <div class="download_div" style="width: 800px; display: flex;flex-wrap: wrap; margin-top: 20px;">
     <?php
     foreach ($p as $pa) {
-        echo '<a href="' .$pa.'" download="" style="margin-right: 20px;"><button class="btn btn-primary">Скачать</button></a>';
+        echo '<a href="' .$pa.'" download="" style="margin-right: 20px;"><button class="btnDownload">Скачать</button></a>';
         $filename = $_SERVER['DOCUMENT_ROOT'].'/files/files1/'.substr($pa, -7);
         $fileContents = file($filename);
 
@@ -58,20 +58,23 @@ $p = explode('||',$full_path);
         $fd = fopen($filename, 'r') or die("не удалось открыть файл");
         $i = 0;
         $str = '';
-        $text = '';
+        $text = [];
+        $txt = '';
         while (!feof($fd)) {
             $str = htmlentities(fgets($fd));
             if ($i >= $first && $i <= $second) {
-                $text .= $str;
-                $text .= "<br>";
+                array_push($text, $str);
+                $txt .= $str;
+                $txt .= "<br>";
             }
             $i++;
         }
         fclose($fd);
 
-        echo '<div class="text_div" style="background-color: white; padding: 20px; border-radius: 20px;margin-top: 20px"><h1>Должностная инструкция: '.$pos.'</h1><p>'.$text.'</p></div>';
-
-
+        echo '<div class="text_div"><h1 class="instr">Должностная инструкция: '.$pos.'</h1></div>';
+        foreach ($text as $el) {
+            echo '<p class="elOfText">'.$el.'</p>';
+        }
     }
 
     ?>
