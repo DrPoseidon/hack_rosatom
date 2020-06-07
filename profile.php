@@ -33,12 +33,18 @@ $p = explode('||',$full_path);
     <link rel="shortcut icon" href="/img/rosatom-1.png" type="image/x-icon">
 </head>
 <body>
+<?php
+foreach ($p as $pa){
+    echo '<a href="full_inst.php?filename='.$_SERVER['DOCUMENT_ROOT'].'/files/files1/'.substr($pa, -7).'" style="color: #FFFFFF; background-color: #0000cc; padding: 5px 15px; border: none; text-decoration: none; position: absolute; top: 60px; left: 20px;">Просмотреть полную инструкцию</a>';
+}
+?>
 <a href="back/logout.php"><button class="btnExit" style="position: absolute;top:20px;right: 20px;">Выход</button></a>
 <a href="download.php" style="color: #FFFFFF; background-color: #0000cc; padding: 5px 15px; border: none; text-decoration: none; position: absolute; top: 20px; left: 20px;">Скачать в PDF</a>
 <div class="div" style="position: absolute;left: 50%;transform: translate(-50%,0);">
 <h2 class="youIn">Вы в личном кабинете!</h2>
 <h3 style="color: white; margin-top: 5px;"><?=$_SESSION['user']['email']?></h3
     <div class="download_div" style="width: 800px; display: flex;flex-wrap: wrap; margin-top: 20px;">
+
     <?php
     foreach ($p as $pa) {
         echo '<a href="' .$pa.'" download="" style="margin-right: 20px;"><button class="btnDownload">Скачать</button></a>';
@@ -71,10 +77,12 @@ $p = explode('||',$full_path);
         }
         fclose($fd);
 
-        echo '<div class="text_div"><h1 class="instr">Должностная инструкция: '.$pos.'</h1></div>';
+        echo '<div class="text_div"><h1 class="instr">Должностная инструкция : '.$pos.'</h1></div>';
         foreach ($text as $el) {
             echo '<p class="elOfText">'.$el.'</p>';
         }
+
+
     }
 
     ?>

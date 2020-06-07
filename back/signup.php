@@ -13,15 +13,6 @@ $pass_confirm = $_POST['pass-confirm'];
 $sub = $_POST['subdivision'];
 $pos = $_POST['position'];
 
-$path = find_word($pos);
-for($i = 0; $i < count($path); $i++){
-    if($i == 0) {
-        $full_path .= $path[$i];
-    }else{
-        $full_path .= '||'.$path[$i];
-    }
-}
-
 $id_info = rand(0,1000000);
 $id_inst = rand(0,1000000);
 $error_fields = [];
@@ -68,7 +59,14 @@ if(!empty($error_fields)){
 
     die();
 }
-
+$path = find_word($pos);
+for($i = 0; $i < count($path); $i++){
+    if($i == 0) {
+        $full_path .= $path[$i];
+    }else{
+        $full_path .= '||'.$path[$i];
+    }
+}
     if($pass_confirm == $pass) {
         $query = 'INSERT INTO users(p_number, email, pass) VALUES (?,?,?)';
         $stmt = $connection->prepare($query);
@@ -111,7 +109,7 @@ if(!empty($error_fields)){
 
 function find_word($value)
 {
-    $dir = '../files/files1';
+    $dir = '../files/files1/';
     $files1 = scandir($dir);
     $st_strpos = $value;
     $k = 0;
