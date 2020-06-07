@@ -66,7 +66,6 @@ foreach ($p as $pa) {
     $ggg = '<div class="text_div"><h1 class="instr">Должностная инструкция: '.$pos.'</h1></div>';
     foreach ($text as $el) {
         $ggg .= '<p class="elOfText">'.$el.'</p>';
-//        echo '<p class="elOfText">'.$el.'</p>';
     }
 
 }

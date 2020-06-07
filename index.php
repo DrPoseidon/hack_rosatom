@@ -1,3 +1,10 @@
+<?php
+session_start();
+//var_dump($_SESSION['user']);die();
+if ($_SESSION['user'] !== NULL) {
+    header('Location: profile.php');
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
