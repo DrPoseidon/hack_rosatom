@@ -33,10 +33,10 @@ $p = explode('||',$full_path);
     <link rel="shortcut icon" href="/img/rosatom-1.png" type="image/x-icon">
 </head>
 <body>
-<!--<a href="downloadFull.php?filename='.$_SERVER['DOCUMENT_ROOT'].'/files/files1/'.substr($pa, -7).'"" style="color: #FFFFFF; background-color: #0000cc; padding: 5px 15px; border: none; text-decoration: none; position: absolute; top: 20px; left: 20px;">Скачать в PDF</a>-->
+<a class="backToProfile" href="profile.php">Вернуться назад</a>
 <?php
 foreach ($p as $pa){
-    echo '<a href="downloadFull.php?filename='.$_SERVER['DOCUMENT_ROOT'].'/files/files1/'.substr($pa, -7).'" style="color: #FFFFFF; background-color: #0000cc; padding: 5px 15px; border: none; text-decoration: none; position: absolute; top: 60px; left: 20px;">Скачать в PDF</a>';
+    echo '<a class="downloadFullPdf" href="downloadFull.php?filename='.$_SERVER['DOCUMENT_ROOT'].'/files/files1/'.substr($pa, -7).'">Скачать в PDF</a>';
 }
 ?>
     <?php
@@ -48,7 +48,7 @@ $filename = $_GET['filename'];
 $pattern = "/I. Общие положения/";
 $linesFound = preg_grep($pattern, $fileContents);
 $first = array_keys($linesFound)[0] . '</br>';
-    $first += 2;
+$first += 2;
 $pattern = "/II. Должностные обязанности/";
 $linesFound = preg_grep($pattern, $fileContents);
 $second = array_keys($linesFound)[0] . '</br>';
@@ -73,7 +73,6 @@ fclose($fd);
     echo '<div class="text_div" style="width: 1000px;"><h1 class="instr" >Общие положения : '.$pos.'</h1></div>';
 foreach ($text as $el) {
     echo '<p class="elOfText" style="width: 1000px;">'.$el.'</p>';
-
 }
     $pattern = "/II. Должностные обязанности/";
     $linesFound = preg_grep($pattern, $fileContents);

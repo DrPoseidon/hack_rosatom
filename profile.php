@@ -35,11 +35,11 @@ $p = explode('||',$full_path);
 <body>
 <?php
 foreach ($p as $pa){
-    echo '<a href="full_inst.php?filename='.$_SERVER['DOCUMENT_ROOT'].'/files/files1/'.substr($pa, -7).'" style="color: #FFFFFF; background-color: #0000cc; padding: 5px 15px; border: none; text-decoration: none; position: absolute; top: 60px; left: 20px;">Просмотреть полную инструкцию</a>';
+    echo '<a class="fullCheck" href="full_inst.php?filename='.$_SERVER['DOCUMENT_ROOT'].'/files/files1/'.substr($pa, -7).'">Просмотреть полную инструкцию</a>';
 }
 ?>
 <a href="back/logout.php"><button class="btnExit" style="position: absolute;top:20px;right: 20px;">Выход</button></a>
-<a href="download.php" style="color: #FFFFFF; background-color: #0000cc; padding: 5px 15px; border: none; text-decoration: none; position: absolute; top: 20px; left: 20px;">Скачать в PDF</a>
+<a class="downloadPdfProfile" href="download.php">Скачать в PDF</a>
 <div class="div" style="position: absolute;left: 50%;transform: translate(-50%,0);">
 <h2 class="youIn">Вы в личном кабинете!</h2>
 <h3 style="color: white; margin-top: 5px;"><?=$_SESSION['user']['email']?></h3
