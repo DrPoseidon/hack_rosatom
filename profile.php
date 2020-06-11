@@ -53,12 +53,12 @@ foreach ($p as $pa){
 
         $pattern = "/II. Должностные обязанности/";
         $linesFound = preg_grep($pattern, $fileContents);
-        $first = array_keys($linesFound)[0] . '</br>';
+        $first = array_keys($linesFound)[0];
         $first += 3;
 
         $pattern = "/III. Права/";
         $linesFound = preg_grep($pattern, $fileContents);
-        $second = array_keys($linesFound)[0] . '</br>';
+        $second = array_keys($linesFound)[0];
         $second -= 3;
 
         $fd = fopen($filename, 'r') or die("не удалось открыть файл");

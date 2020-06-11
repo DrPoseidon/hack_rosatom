@@ -47,11 +47,11 @@ $filename = $_GET['filename'];
     echo '<div class="inst_div" style="position: absolute;left: 50%;transform: translate(-50%,0)">';
 $pattern = "/I. Общие положения/";
 $linesFound = preg_grep($pattern, $fileContents);
-$first = array_keys($linesFound)[0] . '</br>';
+$first = array_keys($linesFound)[0];
 $first += 2;
 $pattern = "/II. Должностные обязанности/";
 $linesFound = preg_grep($pattern, $fileContents);
-$second = array_keys($linesFound)[0] . '</br>';
+$second = array_keys($linesFound)[0];
 $second -= 3;
 
 $fd = fopen($filename, 'r') or die("не удалось открыть файл");
@@ -76,11 +76,11 @@ foreach ($text as $el) {
 }
     $pattern = "/II. Должностные обязанности/";
     $linesFound = preg_grep($pattern, $fileContents);
-    $first = array_keys($linesFound)[0] . '</br>';
+    $first = array_keys($linesFound)[0];
     $first += 2;
     $pattern = "/III. Права/";
     $linesFound = preg_grep($pattern, $fileContents);
-    $second = array_keys($linesFound)[0] . '</br>';
+    $second = array_keys($linesFound)[0];
     $second -= 3;
 
     $fd = fopen($filename, 'r') or die("не удалось открыть файл");
@@ -106,11 +106,11 @@ foreach ($text as $el) {
     }
     $pattern = "/III. Права/";
     $linesFound = preg_grep($pattern, $fileContents);
-    $first = array_keys($linesFound)[0] . '</br>';
+    $first = array_keys($linesFound)[0];
     $first += 2;
     $pattern = "/ IV. Ответственность/";
     $linesFound = preg_grep($pattern, $fileContents);
-    $second = array_keys($linesFound)[0] . '</br>';
+    $second = array_keys($linesFound)[0];
     $second -= 3;
 
     $fd = fopen($filename, 'r') or die("не удалось открыть файл");
@@ -136,11 +136,11 @@ foreach ($text as $el) {
     }
     $pattern = "/IV. Ответственность/";
     $linesFound = preg_grep($pattern, $fileContents);
-    $first = array_keys($linesFound)[0] . '</br>';
+    $first = array_keys($linesFound)[0];
     $first += 2;
     $pattern = "/Должностная инструкция разработана в соответствии/";
     $linesFound = preg_grep($pattern, $fileContents);
-    $second = array_keys($linesFound)[0] . '</br>';
+    $second = array_keys($linesFound)[0];
     $second -= 3;
 
     $fd = fopen($filename, 'r') or die("не удалось открыть файл");
