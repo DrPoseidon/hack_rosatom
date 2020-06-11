@@ -13,8 +13,7 @@ $pass_confirm = $_POST['pass-confirm'];
 $sub = $_POST['subdivision'];
 $pos = $_POST['position'];
 
-$id_info = rand(0,1000000);
-$id_inst = rand(0,1000000);
+
 $error_fields = [];
 if($p_number === ''){
     $error_fields[] = 'p-number';
@@ -68,9 +67,10 @@ for($i = 0; $i < count($path); $i++){
     }
 }
     if($pass_confirm == $pass) {
-        $query = 'INSERT INTO users(p_number, email, pass) VALUES (?,?,?)';
+        $query = 'INSERT INTO `users`(`email`, `pass`, `p_number`) VALUES (?,?,?)';
         $stmt = $connection->prepare($query);
-        $stmt->execute([$p_number, $email, md5($pass)]);
+        $stmt->execute([$email, md5($pass),$p_number, ]);
+        $id_user = $connection->lastInsertId();
 
         $query = 'SELECT id_sub from enterprises where subdivision = ? ';
         $stmt = $connection->prepare($query);
@@ -78,14 +78,16 @@ for($i = 0; $i < count($path); $i++){
         $id_sub = $stmt->fetch();
         $id_sub = $id_sub['id_sub'];
 
-        $query = 'INSERT INTO `instructions`(`id_inst`, `path`) VALUES (?,?)';
+        $query = 'INSERT INTO `instructions`(`path`) VALUES (?)';
         $stmt = $connection->prepare($query);
-        $stmt->execute([$id_inst,$full_path]);
+        $stmt->execute([$full_path]);
+        $id_inst = $connection->lastInsertId();
 
 
-        $query = 'INSERT INTO `info`(`surname`, `name`, `mid_name`, `phone`, `id_info`, `id_sub`, `p_number`, `id_inst`, `position`) VALUES (?,?,?,?,?,?,?,?,?)';
+
+        $query = 'INSERT INTO `info`(`id_sub`, `id_user`, `id_inst`, `surname`, `name`, `mid_name`, `position`, `phone`) VALUES (?,?,?,?,?,?,?,?)';
         $stmt = $connection->prepare($query);
-        $stmt->execute([$surname,$name,$mid_name,$phone,$id_info,$id_sub,$p_number,$id_inst,$pos]);
+        $stmt->execute([$id_sub,$id_user,$id_inst,$surname,$name,$mid_name,$pos,$phone]);
 
 
         $_SESSION['user'] = [

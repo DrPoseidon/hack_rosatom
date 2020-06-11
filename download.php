@@ -1,15 +1,15 @@
 <?php
 session_start();
 require_once('back/connection.php');
-$query = 'select p_number from users where email = ?';
+$query = 'select id_user from users where email = ?';
 $stmt = $connection->prepare($query);
 $stmt->execute([$_SESSION['user']['email']]);
 $res = $stmt->fetch();
-$p_number =  $res['p_number'];
+$id_user =  $res['id_user'];
 
-$query = 'select id_inst,position from info where p_number = ?';
+$query = 'select id_inst,position from info where id_user = ?';
 $stmt = $connection->prepare($query);
-$stmt->execute([$p_number]);
+$stmt->execute([$id_user]);
 $res = $stmt->fetch();
 $id_inst =  $res['id_inst'];
 $pos = $res['position'];
